@@ -3,9 +3,18 @@ import thunk from 'redux-thunk';
 import { init, increment, decrement, asyncIncrement } from './redux/actions';
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './redux/rootReducer';
-import { ASYNC_INCREMENT } from './redux/types';
 
-const store = createStore(rootReducer, 0, applyMiddleware(thunk));
+// custom middleware
+const logger = (state) => {
+	return (next) => {
+		return (action) => {
+			console.log('state', action);
+			return next(action);
+		};
+	};
+};
+
+const store = createStore(rootReducer, 0, applyMiddleware(thunk, logger));
 
 const addBtn = document.getElementById('add');
 const subBtn = document.getElementById('sub');
