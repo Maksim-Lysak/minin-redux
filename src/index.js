@@ -1,18 +1,19 @@
 import './styles.css';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import { init, increment, decrement, asyncIncrement } from './redux/actions';
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './redux/rootReducer';
 
 // custom middleware
-const logger = (state) => {
-	return (next) => {
-		return (action) => {
-			console.log('state', action);
-			return next(action);
-		};
-	};
-};
+// const logger = (state) => {
+// 	return (next) => {
+// 		return (action) => {
+// 			console.log('state', action);
+// 			return next(action);
+// 		};
+// 	};
+// };
 
 const store = createStore(rootReducer, 0, applyMiddleware(thunk, logger));
 
