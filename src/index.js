@@ -8,12 +8,16 @@ import {
 	asyncIncrement,
 	chatngeTheme,
 } from './redux/actions';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from './redux/rootReducer';
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
-
-// const { subscribe, dispatch, getState } = stroe;
+const store = createStore(
+	rootReducer,
+	compose(
+		applyMiddleware(thunk, logger),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	)
+);
 
 const addBtn = document.getElementById('add');
 const subBtn = document.getElementById('sub');
