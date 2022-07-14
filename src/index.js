@@ -2,6 +2,7 @@ import './styles.css';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import {
+	init,
 	increment,
 	decrement,
 	asyncIncrement,
@@ -24,8 +25,12 @@ store.subscribe(() => {
 	const state = store.getState();
 	counter.textContent = state.counter;
 	document.body.classList.toggle(state.theme.value);
-	console.info(document.body.classList);
+	[addBtn, subBtn, asyncBtn, themeBtn].forEach(
+		(item) => (item.disabled = state.theme.disabled)
+	);
 });
+
+store.dispatch(init());
 
 addBtn.addEventListener('click', () => {
 	store.dispatch(increment());
