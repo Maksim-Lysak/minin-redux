@@ -1,4 +1,10 @@
-import { INIT, INCREMENT, DECREMENT, ASYNC_INCREMENT } from './types';
+import {
+	INIT,
+	INCREMENT,
+	DECREMENT,
+	ASYNC_INCREMENT,
+	CHANGE_THEME,
+} from './types';
 
 export const init = () => ({ type: INIT });
 export const increment = () => ({ type: INCREMENT });
@@ -10,3 +16,5 @@ export const asyncIncrement = () => {
 		}, 2000);
 	};
 };
+
+export const chatngeTheme = (payload) => ({ type: CHANGE_THEME, payload });

@@ -1,6 +1,13 @@
-import { INIT, INCREMENT, DECREMENT, ASYNC_INCREMENT } from './types';
+import {
+	INIT,
+	INCREMENT,
+	DECREMENT,
+	ASYNC_INCREMENT,
+	CHANGE_THEME,
+} from './types';
+import { combineReducers } from 'redux';
 
-export const rootReducer = (state, action) => {
+export const counterReducer = (state = 0, action) => {
 	if (action.type === INIT) {
 		return state;
 	} else if (action.type === INCREMENT) {
@@ -12,3 +19,21 @@ export const rootReducer = (state, action) => {
 	}
 	return state;
 };
+
+const initialThemeState = {
+	value: 'light',
+};
+
+export const themeReducer = (state = initialThemeState, action) => {
+	switch (action.type) {
+		case CHANGE_THEME:
+			return { ...state, value: action.payload };
+		default:
+			return state;
+	}
+};
+
+export const rootReducer = combineReducers({
+	counter: counterReducer,
+	theme: themeReducer,
+});
